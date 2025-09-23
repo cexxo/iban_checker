@@ -5,8 +5,11 @@ app = Flask(__name__)
 
 # WSDL SOAP
 WSDL_URL = 'https://ssl.ibanrechner.de/soap/?wsdl'
-USERNAME = 'francotester'
-PASSWORD = 'francotester'
+import os
+
+USERNAME = os.environ.get('USERNAME')
+PASSWORD = os.environ.get('PASSWORD')
+
 
 client = Client(WSDL_URL)
 
@@ -30,3 +33,4 @@ def validate_iban():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
