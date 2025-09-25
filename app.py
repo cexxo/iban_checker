@@ -26,16 +26,17 @@ def validate_iban():
             password=PASSWORD,
             account_holder=""
         )
-        if response.result == 'passed':
+        if response.result != 'failed':
             status = 'Valid' 
         else:
-            status = 'Valid'
+            status = 'Invalid'
         return jsonify({"iban": iban, "status": status})
     except Exception as e:
         return jsonify({"iban": iban, "status": "Error", "error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
 
 
 
