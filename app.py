@@ -30,12 +30,13 @@ def validate_iban():
             status = 'Valid' 
         else:
             status = 'Invalid'
-        return jsonify({"iban": iban, "status": status})
+        return jsonify({"iban": iban, "status": response.result})
     except Exception as e:
         return jsonify({"iban": iban, "status": "Error", "error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
 
 
 
