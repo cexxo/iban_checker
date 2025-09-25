@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from zeep import Client
+import time
 
 app = Flask(__name__)
 
@@ -26,16 +27,15 @@ def validate_iban():
             password=PASSWORD,
             account_holder=""
         )
-        if response.result.strip().lower() != 'failed':
-            status = 'Valid' 
-        else:
-            status = 'Invalid'
+        time.sleep(2)
         return jsonify({"iban": iban, "status": response.result})
     except Exception as e:
+        time.sleep(2)
         return jsonify({"iban": iban, "status": "Error", "error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
 
 
 
