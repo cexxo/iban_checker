@@ -26,7 +26,7 @@ def validate_iban():
             password=PASSWORD,
             account_holder=""
         )
-        if response.result != 'failed':
+        if response.result.strip().lower() != 'failed':
             status = 'Valid' 
         else:
             status = 'Invalid'
@@ -36,6 +36,7 @@ def validate_iban():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
 
 
 
